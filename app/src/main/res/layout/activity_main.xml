@@ -6,33 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="내 위치"
-        android:id="@+id/loactionText"
+        android:text="시작하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp">
 
-    <TextView
-        android:id="@+id/walkingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="걸음 수"
-        tools:layout_editor_absoluteX="177dp"
-        tools:layout_editor_absoluteY="419dp" />
-
-
-    <!--    <TextView-->
-<!--        android:id="@+id/test"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="268dp"-->
-<!--        android:text="test"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.502"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
+    </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

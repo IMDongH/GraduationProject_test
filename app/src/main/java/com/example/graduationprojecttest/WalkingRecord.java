@@ -5,13 +5,13 @@ import java.util.List;
 
 public class WalkingRecord {
 
-    List<WalkingDTO> record = new ArrayList<>();
+    ArrayList<WalkingDTO> record = new ArrayList<>();
 
     public void addRecord(WalkingDTO walking){
         record.add(walking);
     }
 
-    public List<WalkingDTO> getRecord() {
+    public ArrayList<WalkingDTO> getRecord() {
         return record;
     }
 }

@@ -1,29 +1,32 @@
 package com.example.graduationprojecttest;
 
 public class WalkingDTO {
-    String provider; //위치정보
     double longitude; //위도
     double latitude; //경도
     double altitude; //고도
-    String time;
-    int step;
+    String time; //측정 시각
+    String timer; //타이머 시간
+    int step; // 걸음 수
 
+    @Override
+    public String toString() {
+        return "WalkingDTO{" +
+                "longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", altitude=" + altitude +
+                ", time='" + time + '\'' +
+                ", timer='" + timer + '\'' +
+                ", step=" + step +
+                '}';
+    }
 
-    public WalkingDTO(String provider, double longitude, double latitude, double altitude, String time, int step) {
-        this.provider = provider;
+    public WalkingDTO(double longitude, double latitude, double altitude, String time, String timer, int step) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.altitude = altitude;
         this.time = time;
+        this.timer = timer;
         this.step = step;
-    }
-
-    public String getProvider() {
-        return provider;
-    }
-
-    public void setProvider(String provider) {
-        this.provider = provider;
     }
 
     public double getLongitude() {
@@ -56,6 +59,14 @@ public class WalkingDTO {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getTimer() {
+        return timer;
+    }
+
+    public void setTimer(String timer) {
+        this.timer = timer;
     }
 
     public int getStep() {
