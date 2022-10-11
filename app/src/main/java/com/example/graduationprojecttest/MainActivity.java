@@ -22,13 +22,23 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
+
     private TextView loacationText;
     private TextView walkingText;
     SensorManager sensorManager;
     Sensor stepCountSensor;
+
     // 현재 걸음 수
     int currentSteps = 0;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+    WalkingRecord walkingRecord = new WalkingRecord();
+
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         loacationText = (TextView)findViewById(R.id.loactionText);
         walkingText = (TextView)findViewById(R.id.walkingText);
 
-// 활동 퍼미션 체크
+        // 활동 퍼미션 체크
         if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_DENIED){
 
@@ -81,11 +91,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 // 위치정보를 원하는 시간, 거리마다 갱신해준다.
                 manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                        10,
+                        1000, //1초마다
                         0,
                         gpsLocationListener);
                 manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                        10,
+                        1000,
                         0,
                         gpsLocationListener);
             }
@@ -93,13 +103,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     final LocationListener gpsLocationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
-            // 위치 리스너는 위치정보를 전달할 때 호출되므로 onLocationChanged()메소드 안에 위지청보를 처리를 작업을 구현 해야합니다.
+
+            // 위치 리스너는 위치정보를 전달할 때 호출되므로 onLocationChanged()메소드 안에 위지청보를 처리를 작업을 구현
+
             String provider = location.getProvider();  // 위치정보
             double longitude = location.getLongitude(); // 위도
             double latitude = location.getLatitude(); // 경도
             double altitude = location.getAltitude(); // 고도
+
             loacationText.setText("위치정보 : " + provider + "\n" + "위도 : " + longitude + "\n" + "경도 : " + latitude + "\n" + "고도 : " + altitude);
-        } public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            walkingRecord.addRecord(new WalkingDTO(provider,longitude,latitude,altitude,getTime(),currentSteps));
+
+        }
+        public void onStatusChanged(String provider, int status, Bundle extras) {
 
         } public void onProviderEnabled(String provider) {
 
@@ -107,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         }
     };
+
     public void onStart() {
         super.onStart();
         if(stepCountSensor !=null) {
@@ -120,6 +138,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             sensorManager.registerListener(this,stepCountSensor,SensorManager.SENSOR_DELAY_FASTEST);
         }
     }
+
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         // 걸음 센서 이벤트 발생시
@@ -135,9 +155,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
+
+    private String getTime(){
+        long mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
+    }
+
 }
