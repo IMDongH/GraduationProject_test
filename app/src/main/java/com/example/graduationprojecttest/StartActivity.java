@@ -36,7 +36,7 @@ import java.util.Timer;
 
 public class StartActivity extends AppCompatActivity implements SensorEventListener {
 
-    private TextView loacationText;
+    private TextView locationText;
     private TextView walkingText;
     private TextView timerText;
     private Button timerPause;
@@ -76,7 +76,7 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
 
         handler = new Handler() ;
 
-        loacationText = (TextView)findViewById(R.id.loactionText);
+        locationText = (TextView)findViewById(R.id.loactionText);
         walkingText = (TextView)findViewById(R.id.walkingText);
 
         timerText = (TextView)findViewById(R.id.timerText);
@@ -197,7 +197,7 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
                 double latitude = location.getLatitude();
                 double altitude = location.getAltitude();
 
-                loacationText.setText("위치정보 : " + provider + "\n" +
+                locationText.setText("위치정보 : " + provider + "\n" +
                         "위도 : " + longitude + "\n" +
                         "경도 : " + latitude + "\n" +
                         "고도  : " + altitude);
@@ -227,7 +227,7 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
             double latitude = location.getLatitude(); // 경도
             double altitude = location.getAltitude(); // 고도
 
-            loacationText.setText("위치정보 : " + provider + "\n" + "위도 : " + longitude + "\n" + "경도 : " + latitude + "\n" + "고도 : " + altitude);
+            locationText.setText("위치정보 : " + provider + "\n" + "위도 : " + longitude + "\n" + "경도 : " + latitude + "\n" + "고도 : " + altitude);
 
             walkingRecord.addRecord(new WalkingDTO(longitude,latitude,altitude,getTime(),time,currentSteps));
 
