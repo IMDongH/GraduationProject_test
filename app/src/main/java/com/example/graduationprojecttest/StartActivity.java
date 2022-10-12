@@ -140,6 +140,7 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
                 ArrayList<WalkingDTO> record = walkingRecord.getRecord();
 
                 mDatabase.child("users")//유저이름
+                        .child("record")
                         .child(record.get(0).getTime().substring(0,4))//연도
                         .child(record.get(0).getTime().substring(5,7))//월
                         .child(record.get(0).getTime().substring(8,10))//일
