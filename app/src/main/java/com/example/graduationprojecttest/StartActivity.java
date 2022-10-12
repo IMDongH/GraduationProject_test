@@ -24,6 +24,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +42,8 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
     private Button timerPause;
     private Button timerStop;
 
+    private DatabaseReference mDatabase;
+
     Handler handler;
     int Seconds, Minutes, MilliSeconds;
     long MillisecondTime = 0L;  // 스탑워치 시작 버튼을 누르고 흐른 시간
@@ -50,10 +55,10 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
     Sensor stepCountSensor;
 
     // 현재 걸음 수
-    int currentSteps = 0;
+    private int currentSteps = 0;
 
     //흐른 시간
-    String time;
+    private String time;
 
     //현재 날짜 및 시간
     Date mDate;
@@ -127,14 +132,20 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
             @Override
             public void onClick(View view) {
 
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+
                 TimeBuff += MillisecondTime;
                 // Runnable 객체 제거
                 handler.removeCallbacks(runnable);
                 ArrayList<WalkingDTO> record = walkingRecord.getRecord();
 
-                for (WalkingDTO data : record) {
-                    System.out.println(data.getTime() +" = " + data.toString());
-                }
+                mDatabase.child("users")//유저이름
+                        .child(record.get(0).getTime().substring(0,4))//연도
+                        .child(record.get(0).getTime().substring(5,7))//월
+                        .child(record.get(0).getTime().substring(8,10))//일
+                        .child(record.get(0).getTime().substring(10))//시간
+                        .setValue(record);//데이터
+
             }
         });
 
