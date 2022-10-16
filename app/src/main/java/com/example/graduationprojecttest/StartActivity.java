@@ -132,19 +132,20 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
             @Override
             public void onClick(View view) {
 
-                mDatabase = FirebaseDatabase.getInstance().getReference();
-
                 TimeBuff += MillisecondTime;
                 // Runnable 객체 제거
                 handler.removeCallbacks(runnable);
                 ArrayList<WalkingDTO> record = walkingRecord.getRecord();
 
+
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                //데이터베이스에 정보 저장
                 mDatabase.child("users")//유저이름
                         .child("record")
                         .child(record.get(0).getTime().substring(0,4))//연도
                         .child(record.get(0).getTime().substring(5,7))//월
                         .child(record.get(0).getTime().substring(8,10))//일
-                        .child(record.get(0).getTime().substring(10))//시간
+                        .child(record.get(0).getTime().substring(10) + " ~ " + record.get(record.size()-1).getTime().substring(10))//시작 시간
                         .setValue(record);//데이터
 
             }
