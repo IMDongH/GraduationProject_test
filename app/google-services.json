@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "542403282999",
-    "project_id": "graduationprojecttest-b9c48",
-    "storage_bucket": "graduationprojecttest-b9c48.appspot.com"
+    "project_number": "834741296016",
+    "project_id": "graduationproject-af3e4",
+    "storage_bucket": "graduationproject-af3e4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:542403282999:android:c127ed10dd550e9065d7b2",
+        "mobilesdk_app_id": "1:834741296016:android:dbc9bf826a25bdce7ef115",
         "android_client_info": {
           "package_name": "com.example.graduationprojecttest"
         }
       },
       "oauth_client": [
         {
-          "client_id": "542403282999-hu6a827cc4vrfefvpe5e043r26at8f1o.apps.googleusercontent.com",
+          "client_id": "834741296016-f889bg9en24a10og57pfobgr97eb9m1d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.graduationprojecttest",
+            "certificate_hash": "abe82b3fd2f23a6c7a794239d48fdb39a3245a04"
+          }
+        },
+        {
+          "client_id": "834741296016-55qmom2j6qm7un9j88d59rtjptq0lj9p.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCUV15Ful3e5RyOJWtH3Zjhnu6ciN_DBCU"
+          "current_key": "AIzaSyATKeR3LOAtHrsq1XblGCgKugvnTcqjyaU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "542403282999-hu6a827cc4vrfefvpe5e043r26at8f1o.apps.googleusercontent.com",
+              "client_id": "834741296016-55qmom2j6qm7un9j88d59rtjptq0lj9p.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
